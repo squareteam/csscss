@@ -76,7 +76,7 @@ module Csscss
           @color = c
         end
         
-        opts.on("--sass-loadpath", "Add loadpath to options given to Sass::Engine") do |sass_loadpath|
+        opts.on("--sass-loadpath path", "Add loadpath to options given to Sass::Engine") do |sass_loadpath|
           @sass_loadpath = sass_loadpath
         end
 
