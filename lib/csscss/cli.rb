@@ -75,6 +75,10 @@ module Csscss
         opts.on("--[no-]color", "Colorize output", "(default is #{@color})") do |c|
           @color = c
         end
+        
+        opts.on("--sass-loadpath", "Add loadpath to options given to Sass::Engine") do |sass_loadpath|
+          @sass_loadpath = sass_loadpath
+        end
 
         opts.on("-n", "--num N", Integer, "Print matches with at least this many rules.", "(default is 3)") do |n|
           @minimum = n
@@ -173,6 +177,7 @@ module Csscss
 
       sass_options = {cache:false}
       sass_options[:load_paths] = Compass.configuration.sass_load_paths if @compass
+      sass_options[:load_paths] = (sass_options[:load_paths] || []).concat(@sass_loadpath) if @sass_loadpath
       begin
         Sass::Engine.for_file(filename, sass_options).render
       rescue Sass::SyntaxError => e
