@@ -177,7 +177,7 @@ module Csscss
 
       sass_options = {cache:false}
       sass_options[:load_paths] = Compass.configuration.sass_load_paths if @compass
-      sass_options[:load_paths] = (sass_options[:load_paths] || []).concat(@sass_loadpath) if @sass_loadpath
+      sass_options[:load_paths] = (sass_options[:load_paths] || []).concat(@sass_loadpath.split(',')) if @sass_loadpath
       begin
         Sass::Engine.for_file(filename, sass_options).render
       rescue Sass::SyntaxError => e
